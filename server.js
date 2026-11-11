@@ -1,0 +1,19 @@
+const express=require("express"),fs=require("fs"),path=require("path");
+const app=express(),PORT=process.env.PORT||3000,dir=path.join(__dirname,"data");
+const files={employees:"employees.json",attendance:"attendance.json",settings:"settings.json"};
+app.use(express.json());app.use(express.static(path.join(__dirname,"public")));
+function read(k){const p=path.join(dir,files[k]);if(!fs.existsSync(p)){fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(p,JSON.stringify(k==="settings"?{companyName:"EmployeeHub",tagline:"Smart Employee & HR Management Portal"}:[],null,2));}try{return JSON.parse(fs.readFileSync(p,"utf8"))}catch{return []}}
+function write(k,v){fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,files[k]),JSON.stringify(v,null,2))}
+const clean=v=>String(v??"").trim(),err=b=>{for(const k of ["name","email","department","position","salary"])if(!clean(b[k]))return k+" is required";if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean(b.email)))return "Enter a valid email";if(!Number.isFinite(+b.salary)||+b.salary<0)return "Salary must be a non-negative number";return null};
+const next=a=>a.reduce((m,e)=>Math.max(m,+e.id||1000),1000)+1;
+app.get("/api/employees",(q,s)=>s.json(read("employees")));
+app.post("/api/employees",(q,s)=>{let e=err(q.body);if(e)return s.status(400).json({error:e});let a=read("employees"),email=clean(q.body.email).toLowerCase();if(a.some(x=>x.email===email))return s.status(409).json({error:"Email already exists"});let n={id:next(a),...q.body,email,salary:+q.body.salary,createdAt:new Date().toISOString()};a.push(n);write("employees",a);s.status(201).json(n)});
+app.put("/api/employees/:id",(q,s)=>{let e=err(q.body);if(e)return s.status(400).json({error:e});let a=read("employees"),i=a.findIndex(x=>String(x.id)===q.params.id);if(i<0)return s.status(404).json({error:"Employee not found"});let email=clean(q.body.email).toLowerCase();if(a.some((x,j)=>j!==i&&x.email===email))return s.status(409).json({error:"Email already exists"});a[i]={...a[i],...q.body,email,salary:+q.body.salary};write("employees",a);s.json(a[i])});
+app.delete("/api/employees/:id",(q,s)=>{let a=read("employees"),b=a.filter(x=>String(x.id)!==q.params.id);if(a.length===b.length)return s.status(404).json({error:"Employee not found"});write("employees",b);write("attendance",read("attendance").filter(x=>String(x.employeeId)!==q.params.id));s.json({message:"Deleted"})});
+app.get("/api/attendance",(q,s)=>s.json(read("attendance")));
+app.post("/api/attendance",(q,s)=>{let {employeeId,date,status}=q.body;employeeId=+employeeId;let emp=read("employees").find(x=>x.id===employeeId);if(!emp||!date||!["Present","Absent","On leave"].includes(status))return s.status(400).json({error:"Select a valid employee, date and status"});let a=read("attendance"),i=a.findIndex(x=>x.employeeId===employeeId&&x.date===date),r={employeeId,employeeName:emp.name,department:emp.department,date,status};if(i<0)a.push(r);else a[i]=r;write("attendance",a);s.json(r)});
+app.delete("/api/attendance/:id/:date",(q,s)=>{write("attendance",read("attendance").filter(x=>!(String(x.employeeId)===q.params.id&&x.date===q.params.date)));s.json({message:"Removed"})});
+app.get("/api/settings",(q,s)=>s.json(read("settings")));
+app.put("/api/settings",(q,s)=>{let v={companyName:clean(q.body.companyName),tagline:clean(q.body.tagline)};if(!v.companyName)return s.status(400).json({error:"Company name is required"});write("settings",v);s.json(v)});
+app.get("*",(q,s)=>s.sendFile(path.join(__dirname,"public","index.html")));
+app.listen(PORT,()=>console.log(`EmployeeHub running at http://localhost:${PORT}`));

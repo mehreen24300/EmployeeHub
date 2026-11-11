@@ -1,0 +1,149 @@
+[
+  {
+    "employeeId": 1001,
+    "employeeName": "Aarav Sharma",
+    "department": "IT",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1002,
+    "employeeName": "Priya Nair",
+    "department": "Human Resources",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1003,
+    "employeeName": "Rohan Mehta",
+    "department": "Sales",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1004,
+    "employeeName": "Sneha Iyer",
+    "department": "Finance",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1005,
+    "employeeName": "Karan Malhotra",
+    "department": "Marketing",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1006,
+    "employeeName": "Ananya Das",
+    "department": "Design",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1007,
+    "employeeName": "Vikram Rao",
+    "department": "IT",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1008,
+    "employeeName": "Meera Reddy",
+    "department": "Human Resources",
+    "date": "2026-11-03",
+    "status": "On leave"
+  },
+  {
+    "employeeId": 1009,
+    "employeeName": "Imran Khan",
+    "department": "Sales",
+    "date": "2026-11-03",
+    "status": "Absent"
+  },
+  {
+    "employeeId": 1010,
+    "employeeName": "Divya Menon",
+    "department": "Finance",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1012,
+    "employeeName": "Kavya Joshi",
+    "department": "IT",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1013,
+    "employeeName": "Rahul Verma",
+    "department": "Design",
+    "date": "2026-11-03",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1001,
+    "employeeName": "Aarav Sharma",
+    "department": "IT",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1002,
+    "employeeName": "Priya Nair",
+    "department": "Human Resources",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1003,
+    "employeeName": "Rohan Mehta",
+    "department": "Sales",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1004,
+    "employeeName": "Sneha Iyer",
+    "department": "Finance",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1005,
+    "employeeName": "Karan Malhotra",
+    "department": "Marketing",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1006,
+    "employeeName": "Ananya Das",
+    "department": "Design",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1007,
+    "employeeName": "Vikram Rao",
+    "department": "IT",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1009,
+    "employeeName": "Imran Khan",
+    "department": "Sales",
+    "date": "2026-11-02",
+    "status": "Present"
+  },
+  {
+    "employeeId": 1010,
+    "employeeName": "Divya Menon",
+    "department": "Finance",
+    "date": "2026-11-02",
+    "status": "Absent"
+  }
+]
